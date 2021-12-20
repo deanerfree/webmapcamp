@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useRef } from "react"
 import { ParkCampContext } from "../../context/parkCampContext"
 import {
 	ListItemStyle,
@@ -13,22 +13,27 @@ const AccordionItems = ({ ...props }) => {
 	const {
 		activePoint,
 		setActivePoint,
+		setSubActivePoint,
 		parkDataArray,
 		goToLocation,
 		setSelectedPark,
 	} = useContext(ParkCampContext)
-	const { campground, images, name, index, key, ...rest } = props
+
+	const { campground, images, name, index } = props
 	const [open, setOpen] = useState(false)
 
 	const toggleDisplay = () => {
-		setOpen(!open)
+		if (open === true) {
+			setOpen(false)
+		}
+		setSelectedPark(parkDataArray[activePoint])
 		goToLocation(
 			parseFloat(parkDataArray[activePoint].latitude),
 			parseFloat(parkDataArray[activePoint].longitude)
 		)
-		console.log(parkDataArray[activePoint])
-		setSelectedPark(parkDataArray[activePoint])
+		setOpen(!open)
 	}
+
 	return (
 		<>
 			<ListStyle
@@ -43,9 +48,13 @@ const AccordionItems = ({ ...props }) => {
 					<CheveronDown />
 				</Cheveron>
 			</ListStyle>
-			{campground.map((camp) => {
+			{campground.map((camp, i) => {
 				return (
-					<ListItemStyle open={open} key={camp.id}>
+					<ListItemStyle
+						open={open}
+						key={camp.id}
+						onMouseOver={() => setSubActivePoint(camp)}
+						onMouseOut={() => setSubActivePoint(null)}>
 						{camp.name}
 					</ListItemStyle>
 				)

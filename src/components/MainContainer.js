@@ -21,11 +21,8 @@ const MainContainer = () => {
 						/>
 					</Col>
 					<Col size={2}>
-						<Row height={"45vh"}>
+						<Row height={"90vh"}>
 							<Map parkDataArray={parkDataArray} />
-						</Row>
-						<Row height={"45vh"}>
-							<DataDisplay />
 						</Row>
 					</Col>
 				</Grid>

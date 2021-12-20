@@ -8,10 +8,11 @@ const ParkCampContextProvider = (props) => {
 	const [parkDataArray, setParkDataArray] = useState([])
 	const [tempData, setTempData] = useState([])
 	const [activePoint, setActivePoint] = useState(null)
+	const [subActivePoint, setSubActivePoint] = useState(null)
 	const [lng, setLng] = useState(-119.77431935000001)
 	const [lat, setLat] = useState(37.83667174)
 	const [zoom, setZoom] = useState(4)
-	const [selectedPark, setSelectedPark] = useState()
+	const [selectedPark, setSelectedPark] = useState(null)
 
 	const [viewport, setViewPort] = useState({
 		latitude: lat,
@@ -19,8 +20,6 @@ const ParkCampContextProvider = (props) => {
 		zoom: zoom,
 	})
 	const openWeatherKey = process.env.REACT_APP_OPENWEATHER_APIKEY
-	// const openWeatherKey = REACT_APP_OPENWEATHER_APIKEY
-	// const openWeatherKey = "bc37eb0975dae45e6e408e83622883f3"
 	const mapRef = useRef()
 
 	const getTempData = async (lat, lng) => {
@@ -42,8 +41,10 @@ const ParkCampContextProvider = (props) => {
 		try {
 			const data = await axios("/api/v1/parkLocations")
 			const campgroundData = await axios("/api/v1/campgrounds")
-			if (data.status === 200 || campgroundData.status === 200) {
+			if (data.status === 200) {
 				setParkDataArray(data.data.filteredData)
+			}
+			if (campgroundData.status === 200) {
 				setCampgroundArray(campgroundData.data.initialCampsiteData)
 			}
 		} catch (error) {
@@ -87,6 +88,8 @@ const ParkCampContextProvider = (props) => {
 				getTempData,
 				selectedPark,
 				setSelectedPark,
+				subActivePoint,
+				setSubActivePoint,
 			}}>
 			{props.children}
 		</ParkCampContext.Provider>

@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react"
 import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl"
 import { Tent3 as Tent, Tent4 } from "../svg"
 import { MapContainer } from "../styles/mapCompStyle"
+import { Row } from "../styles/dataStyle"
+import DataDisplay from "./dataDisplay/DataDisplay"
 
 import {
 	buildArray,
@@ -39,8 +41,8 @@ const Map = ({ parkDataArray }) => {
 	}, [])
 
 	const mapStyle = {
-		height: "45vh",
-		width: "100%",
+		height: "90vh",
+		width: "70vw",
 	}
 
 	return (
@@ -99,6 +101,9 @@ const Map = ({ parkDataArray }) => {
 					</Marker>
 				) : null}
 			</ReactMapGL>
+			{/* <Row height={"45vh"}> */}
+			<DataDisplay />
+			{/* </Row> */}
 		</MapContainer>
 	)
 }
