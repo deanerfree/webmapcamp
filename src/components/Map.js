@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from "react"
-import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl"
+import React, { useEffect, useContext } from "react"
+import ReactMapGL, { Marker } from "react-map-gl"
 import { Tent3 as Tent, Tent4 } from "../svg"
 import { MapContainer } from "../styles/mapCompStyle"
 import { Row } from "../styles/dataStyle"
 import DataDisplay from "./dataDisplay/DataDisplay"
+import Controls from "./controls/Controls"
 
 import {
 	buildArray,
@@ -15,6 +16,7 @@ const Map = ({ parkDataArray }) => {
 	const {
 		mapRef,
 		activePoint,
+		subActivePoint,
 		viewport,
 		setViewPort,
 		setLng,
@@ -73,10 +75,12 @@ const Map = ({ parkDataArray }) => {
 										onClick={() =>
 											goToLocation(
 												parseFloat(park.latitude),
-												parseFloat(park.longitude)
+												parseFloat(park.longitude),
+												8.1
 											)
 										}>
 										<Tent />
+										{park.campground.length}
 									</button>
 								</Marker>
 							)
@@ -99,11 +103,15 @@ const Map = ({ parkDataArray }) => {
 						longitude={parseFloat(parkDataArray[activePoint].longitude)}>
 						<Tent4 />
 					</Marker>
+				) : subActivePoint !== null ? (
+					<Marker
+						latitude={parseFloat(subActivePoint.latitude)}
+						longitude={parseFloat(subActivePoint.longitude)}>
+						<Tent4 />
+					</Marker>
 				) : null}
 			</ReactMapGL>
-			{/* <Row height={"45vh"}> */}
-			<DataDisplay />
-			{/* </Row> */}
+			<Controls />
 		</MapContainer>
 	)
 }

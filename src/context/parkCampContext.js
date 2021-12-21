@@ -52,12 +52,12 @@ const ParkCampContextProvider = (props) => {
 		}
 	}
 
-	const goToLocation = (lat, lng) => {
+	const goToLocation = (lat, lng, zoom) => {
 		setViewPort({
 			...viewport,
 			longitude: lng,
 			latitude: lat,
-			zoom: 8,
+			zoom: zoom,
 			transitionDuration: "auto",
 			transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
 			// transitionEasing: d3.easeCubic,

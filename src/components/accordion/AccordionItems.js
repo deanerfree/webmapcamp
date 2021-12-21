@@ -8,6 +8,8 @@ import {
 	Title,
 } from "../../styles/accordionStyle"
 import { CheveronDown } from "../../svg"
+import Carousel from "../carousel/Carousel"
+import ParkDataBrief from "../dataDisplay/ParkDataBrief"
 
 const AccordionItems = ({ ...props }) => {
 	const {
@@ -19,17 +21,16 @@ const AccordionItems = ({ ...props }) => {
 		setSelectedPark,
 	} = useContext(ParkCampContext)
 
-	const { campground, images, name, index } = props
+	const { campground, images, name, index, description } = props
 	const [open, setOpen] = useState(false)
+	const [openAcc, setOpenAcc] = useState(false)
 
 	const toggleDisplay = () => {
-		if (open === true) {
-			setOpen(false)
-		}
 		setSelectedPark(parkDataArray[activePoint])
 		goToLocation(
 			parseFloat(parkDataArray[activePoint].latitude),
-			parseFloat(parkDataArray[activePoint].longitude)
+			parseFloat(parkDataArray[activePoint].longitude),
+			8
 		)
 		setOpen(!open)
 	}
@@ -38,7 +39,6 @@ const AccordionItems = ({ ...props }) => {
 		<>
 			<ListStyle
 				animated
-				images={images[0].url}
 				open={open}
 				onClick={toggleDisplay}
 				onMouseOver={() => setActivePoint(index)}
@@ -48,15 +48,20 @@ const AccordionItems = ({ ...props }) => {
 					<CheveronDown />
 				</Cheveron>
 			</ListStyle>
+			{open ? (
+				<ParkDataBrief name={name} description={description} images={images} />
+			) : null}
 			{campground.map((camp, i) => {
 				return (
-					<ListItemStyle
-						open={open}
-						key={camp.id}
-						onMouseOver={() => setSubActivePoint(camp)}
-						onMouseOut={() => setSubActivePoint(null)}>
-						{camp.name}
-					</ListItemStyle>
+					<div key={camp.id}>
+						{open ? (
+							<ParkDataBrief
+								name={camp.name}
+								description={camp.description}
+								images={camp.images}
+							/>
+						) : null}
+					</div>
 				)
 			})}
 		</>

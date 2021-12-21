@@ -6,7 +6,11 @@ import ParkDataBrief from "./ParkDataBrief"
 const DataDisplay = () => {
 	const { parkDataArray, activePoint, selectedPark } =
 		useContext(ParkCampContext)
-	return <Wrapper>{selectedPark ? <ParkDataBrief /> : <p>Here</p>}</Wrapper>
+	return (
+		<Wrapper>
+			<ParkDataBrief />{" "}
+		</Wrapper>
+	)
 }
 
 export default DataDisplay

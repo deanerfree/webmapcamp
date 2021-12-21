@@ -166,3 +166,68 @@ export const CheveronDown = () => {
 		</svg>
 	)
 }
+
+export const ResetMapZoom = () => {
+	return (
+		<svg
+			width='35'
+			height='35'
+			viewBox='0 0 314 314'
+			fill='none'
+			xmlns='http://www.w3.org/2000/svg'>
+			<g filter='url(#filter0_d_0_1)'>
+				<circle cx='157' cy='152' r='125' fill='#5D7963' />
+				<circle cx='157' cy='152' r='120.5' stroke='black' strokeWidth='9' />
+			</g>
+			<path
+				d='M219 75L82 183.815L135.983 171V231L219 75Z'
+				fill='#FFE9AF'
+				stroke='#FFE9AF'
+				strokeWidth='5'
+				strokeLinejoin='round'
+			/>
+			<defs>
+				<filter
+					id='filter0_d_0_1'
+					x='0'
+					y='0'
+					width='314'
+					height='314'
+					filterUnits='userSpaceOnUse'
+					colorInterpolationFilters='sRGB'>
+					<feFlood floodOpacity='0' result='BackgroundImageFix' />
+					<feColorMatrix
+						in='SourceAlpha'
+						type='matrix'
+						values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+						result='hardAlpha'
+					/>
+					<feMorphology
+						radius='10'
+						operator='dilate'
+						in='SourceAlpha'
+						result='effect1_dropShadow_0_1'
+					/>
+					<feOffset dy='5' />
+					<feGaussianBlur stdDeviation='11' />
+					<feComposite in2='hardAlpha' operator='out' />
+					<feColorMatrix
+						type='matrix'
+						values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'
+					/>
+					<feBlend
+						mode='normal'
+						in2='BackgroundImageFix'
+						result='effect1_dropShadow_0_1'
+					/>
+					<feBlend
+						mode='normal'
+						in='SourceGraphic'
+						in2='effect1_dropShadow_0_1'
+						result='shape'
+					/>
+				</filter>
+			</defs>
+		</svg>
+	)
+}

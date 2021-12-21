@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 	border-radius: ${(props) => props.theme.borders.borderRadius};
 	top: 0;
 	left: 50;
+	overflow: hidden;
 `
 
 export const Grid = styled.div`
@@ -24,4 +25,18 @@ export const Row = styled.div`
 export const Col = styled.div`
 	flex: ${(props) => props.size};
 	flex-direction: column;
+`
+
+export const ImageWrapper = styled.div`
+	display: block;
+	height: 50%;
+	position: relative;
+`
+export const SliderImage = styled.img`
+	display: block;
+	box-sizing: border-box;
+	height: 21.333vw;
+	width: 100% !important;
+	padding: 0px 2vw;
+	object-fit: cover;
 `

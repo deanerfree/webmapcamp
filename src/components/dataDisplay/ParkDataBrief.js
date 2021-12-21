@@ -1,25 +1,17 @@
 import React, { useContext } from "react"
 import { ParkCampContext } from "../../context/parkCampContext"
-const ParkDataBrief = () => {
-	const { parkDataArray, activePoint, subActivePoint, selectedPark } =
+// import { ImageWrapper, SliderImage } from "../../styles/dataStyle"
+import Carousel from "../carousel/Carousel"
+const ParkDataBrief = ({ ...props }) => {
+	const { parkDataArray, activePoint, subActivePoint } =
 		useContext(ParkCampContext)
+	const { name, description, images } = props
 
 	return (
 		<div>
-			<h3>
-				{activePoint !== null
-					? parkDataArray[activePoint].name
-					: subActivePoint !== null
-					? subActivePoint.name
-					: "Hover over Park"}
-			</h3>
-			<p>
-				{activePoint !== null
-					? parkDataArray[activePoint].description
-					: subActivePoint !== null
-					? subActivePoint.description
-					: null}
-			</p>
+			<h3>{name || "Nothing here"}</h3>
+			<Carousel images={images} />
+			<p>{description || null}</p>
 		</div>
 	)
 }

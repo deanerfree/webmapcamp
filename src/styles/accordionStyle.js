@@ -47,7 +47,6 @@ export const ListStyle = styled.div`
 		props.open ? props.theme.colors.active : props.theme.colors.button};
 	cursor: pointer;
 	border-bottom: ${(props) => props.theme.borders.bottomBorder};
-	overflow: hidden;
 	${(props) =>
 		props.animated &&
 		css`
@@ -86,7 +85,7 @@ export const ListContainer = styled.div`
 	border: ${(props) => props.theme.borders.outline};
 	width: 300px;
 	max-height: 90vh;
-	overflow: hidden;
+	overflow-y: auto;
 `
 export const Cheveron = styled.div`
 	transform: rotate(0deg);
