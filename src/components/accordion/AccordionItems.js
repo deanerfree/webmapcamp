@@ -18,21 +18,20 @@ const AccordionItems = ({ ...props }) => {
 		parkDataArray,
 		goToLocation,
 		setSelectedPark,
-		toggleDisplay,
 	} = useContext(ParkCampContext)
 
 	const { campground, images, name, index, description } = props
 	const [open, setOpen] = useState(false)
 
-	// const toggleDisplay = (status) => {
-	// 	setSelectedPark(parkDataArray[activePoint])
-	// 	goToLocation(
-	// 		parseFloat(parkDataArray[activePoint].latitude),
-	// 		parseFloat(parkDataArray[activePoint].longitude),
-	// 		8
-	// 	)
-	// 	setOpen(!status)
-	// }
+	const toggleDisplay = (status) => {
+		setSelectedPark(parkDataArray[activePoint])
+		goToLocation(
+			parseFloat(parkDataArray[activePoint].latitude),
+			parseFloat(parkDataArray[activePoint].longitude),
+			8
+		)
+		setOpen(!status)
+	}
 
 	return (
 		<>
