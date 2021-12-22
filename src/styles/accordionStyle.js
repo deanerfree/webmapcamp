@@ -86,9 +86,18 @@ export const ListContainer = styled.div`
 	width: 300px;
 	max-height: 90vh;
 	overflow-y: auto;
+	overflow-x: hidden;
 `
 export const Cheveron = styled.div`
 	transform: rotate(0deg);
 	transform: ${({ open }) => (open ? `rotate(0deg)` : `rotate(90deg)`)};
 	transition: all 0.3s ease-out;
+`
+
+export const ListCard = styled.div`
+margin-bottom: 20px;
+padding-bottom: 10px;
+border: ${(props) => props.theme.borders.bottomBorder};
+border-radius: ${(props) => props.theme.borders.borderRadius}
+box-shadow: 2px 1px 10px gray;
 `

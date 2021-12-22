@@ -36,7 +36,12 @@ export const SliderImage = styled.img`
 	display: block;
 	box-sizing: border-box;
 	height: 21.333vw;
-	width: 100% !important;
+	width: 90% !important;
 	padding: 0px 2vw;
 	object-fit: cover;
+`
+
+export const DescriptionWrapper = styled.p`
+	margin: 30px 10px 0px 10px;
+	font-size: 12px;
 `

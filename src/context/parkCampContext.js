@@ -6,13 +6,14 @@ export const ParkCampContext = createContext()
 const ParkCampContextProvider = (props) => {
 	const [campgroundArray, setCampgroundArray] = useState([])
 	const [parkDataArray, setParkDataArray] = useState([])
-	const [tempData, setTempData] = useState([])
+	// const [tempData, setTempData] = useState([])
 	const [activePoint, setActivePoint] = useState(null)
 	const [subActivePoint, setSubActivePoint] = useState(null)
 	const [lng, setLng] = useState(-119.77431935000001)
 	const [lat, setLat] = useState(37.83667174)
 	const [zoom, setZoom] = useState(4)
 	const [selectedPark, setSelectedPark] = useState(null)
+	const [open, setOpen] = useState(false)
 
 	const [viewport, setViewPort] = useState({
 		latitude: lat,
@@ -68,6 +69,16 @@ const ParkCampContextProvider = (props) => {
 		getData()
 	}, [])
 
+	const toggleDisplay = (status) => {
+		setSelectedPark(parkDataArray[activePoint])
+		goToLocation(
+			parseFloat(parkDataArray[activePoint].latitude),
+			parseFloat(parkDataArray[activePoint].longitude),
+			8
+		)
+		setOpen(!status)
+	}
+
 	return (
 		<ParkCampContext.Provider
 			value={{
@@ -90,6 +101,7 @@ const ParkCampContextProvider = (props) => {
 				setSelectedPark,
 				subActivePoint,
 				setSubActivePoint,
+				toggleDisplay,
 			}}>
 			{props.children}
 		</ParkCampContext.Provider>

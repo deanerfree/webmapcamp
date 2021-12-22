@@ -4,7 +4,6 @@ import { MainContainer as MContainer } from "../styles"
 import { ParkCampContext } from "../context/parkCampContext"
 import Map from "./Map"
 import Accordion from "./accordion/Accordion"
-import DataDisplay from "./dataDisplay/DataDisplay"
 import { Grid, Col, Row } from "../styles/dataStyle"
 
 const MainContainer = () => {

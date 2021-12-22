@@ -1,9 +1,7 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, useCallback } from "react"
 import ReactMapGL, { Marker } from "react-map-gl"
 import { Tent3 as Tent, Tent4 } from "../svg"
 import { MapContainer } from "../styles/mapCompStyle"
-import { Row } from "../styles/dataStyle"
-import DataDisplay from "./dataDisplay/DataDisplay"
 import Controls from "./controls/Controls"
 
 import {
@@ -27,14 +25,17 @@ const Map = ({ parkDataArray }) => {
 	const { REACT_APP_MAPBOX_ACCESS_TOKEN } = process.env
 	const mapboxApiKey = REACT_APP_MAPBOX_ACCESS_TOKEN
 
-	const findMidpoint = (data) => {
-		let latLongArray = buildArray(data)
-		let longMidpoint = calcLatLongMidpoint(latLongArray.longArray)
-		let latMidpoint = calcLatLongMidpoint(latLongArray.latArray)
-		// console.log(longMidpoint, latMidpoint)
-		setLng(longMidpoint)
-		setLat(latMidpoint)
-	}
+	const findMidpoint = useCallback(
+		() => (data) => {
+			let latLongArray = buildArray(data)
+			let longMidpoint = calcLatLongMidpoint(latLongArray.longArray)
+			let latMidpoint = calcLatLongMidpoint(latLongArray.latArray)
+			// console.log(longMidpoint, latMidpoint)
+			setLng(longMidpoint)
+			setLat(latMidpoint)
+		},
+		[parkDataArray]
+	)
 
 	useEffect(() => {
 		if (parkDataArray) {

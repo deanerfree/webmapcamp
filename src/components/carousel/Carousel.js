@@ -1,31 +1,31 @@
 import { ImageWrapper, SliderImage } from "../../styles/dataStyle"
-import AliceCarousel from "react-alice-carousel"
-import "react-alice-carousel/lib/alice-carousel.css"
-
-const handleDragStart = (e) => e.preventDefault()
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 const Carousel = ({ ...props }) => {
 	const { images } = props
-	const items = images.map((image) => {
-		return (
-			<SliderImage
-				src={image.url}
-				onDragStart={handleDragStart}
-				role='presentation'
-			/>
-		)
-	})
+	const settings = {
+		dots: true,
+		arrows: true,
+		infinite: true,
+		speed: 1000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		className: "slides",
+		marginBottom: "20px",
+	}
+
 	return (
-		<ImageWrapper>
-			<AliceCarousel
-				animationType='fadeout'
-				animationDuration={800}
-				disableButtonsControls
-				infinite
-				mouseTracking
-				items={items}
-			/>
-		</ImageWrapper>
+		<Slider {...settings}>
+			{images.map((image) => {
+				return (
+					<ImageWrapper>
+						<SliderImage src={image.url} loading='lazy' />{" "}
+					</ImageWrapper>
+				)
+			})}
+		</Slider>
 	)
 }
 

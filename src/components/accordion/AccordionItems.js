@@ -1,14 +1,13 @@
-import React, { useState, useContext, useRef } from "react"
+import React, { useState, useContext } from "react"
 import { ParkCampContext } from "../../context/parkCampContext"
 import {
-	ListItemStyle,
 	ListContainer,
 	ListStyle,
+	ListCard,
 	Cheveron,
 	Title,
 } from "../../styles/accordionStyle"
 import { CheveronDown } from "../../svg"
-import Carousel from "../carousel/Carousel"
 import ParkDataBrief from "../dataDisplay/ParkDataBrief"
 
 const AccordionItems = ({ ...props }) => {
@@ -19,28 +18,28 @@ const AccordionItems = ({ ...props }) => {
 		parkDataArray,
 		goToLocation,
 		setSelectedPark,
+		toggleDisplay,
 	} = useContext(ParkCampContext)
 
 	const { campground, images, name, index, description } = props
 	const [open, setOpen] = useState(false)
-	const [openAcc, setOpenAcc] = useState(false)
 
-	const toggleDisplay = () => {
-		setSelectedPark(parkDataArray[activePoint])
-		goToLocation(
-			parseFloat(parkDataArray[activePoint].latitude),
-			parseFloat(parkDataArray[activePoint].longitude),
-			8
-		)
-		setOpen(!open)
-	}
+	// const toggleDisplay = (status) => {
+	// 	setSelectedPark(parkDataArray[activePoint])
+	// 	goToLocation(
+	// 		parseFloat(parkDataArray[activePoint].latitude),
+	// 		parseFloat(parkDataArray[activePoint].longitude),
+	// 		8
+	// 	)
+	// 	setOpen(!status)
+	// }
 
 	return (
 		<>
 			<ListStyle
 				animated
 				open={open}
-				onClick={toggleDisplay}
+				onClick={() => toggleDisplay(open)}
 				onMouseOver={() => setActivePoint(index)}
 				onMouseOut={() => setActivePoint(null)}>
 				<Title>{name}</Title>
@@ -51,9 +50,13 @@ const AccordionItems = ({ ...props }) => {
 			{open ? (
 				<ParkDataBrief name={name} description={description} images={images} />
 			) : null}
+
 			{campground.map((camp, i) => {
 				return (
-					<div key={camp.id}>
+					<div
+						key={camp.id}
+						onMouseOver={() => setSubActivePoint(camp)}
+						onMouseOut={() => setActivePoint(null)}>
 						{open ? (
 							<ParkDataBrief
 								name={camp.name}

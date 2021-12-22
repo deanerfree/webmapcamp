@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 	width: 5;
 	border: ${(props) => props.theme.borders.outline};
 	border-radius: ${(props) => props.theme.borders.borderRadius};
-	top: 0;
+	top: 75vh;
 	left: 60vw;
 	overflow: hidden;
 	background: ${(props) => props.theme.colors.background};
